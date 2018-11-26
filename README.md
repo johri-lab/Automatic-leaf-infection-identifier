@@ -73,6 +73,7 @@ The code runs on two files:
 + First, `main.py` for image segmentatin and feature extraction.
 + Second, `classifier.py` is called in `main.py` for classifying the leaf in the input image as "infected" or "healthy".
 
+![leafdetection](https://user-images.githubusercontent.com/30645315/49014339-cb72db00-f1a5-11e8-9ceb-4010a860e162.gif)
 
 
 ## Links
