@@ -1,8 +1,18 @@
 # Automatic leaf infection identification
 
+### List of contents
+
+- [Introduction](#introduction)
+- [Working](#working)
+- [Dataset creation](#dataset-creation)
+- [Running](#running)
+- [License](#license)
+
 
 ## Introduction
 ---
+[(Back to top)](#list-of-contents)
+
 Since, disease detection in plants plays an important role in the agriculture field, as having a disease in plants are quite natural. If proper care is not taken in this area then it can cause serious effects on plants and due to which respective product quality, quantity or productivity is also affected.
 Plant diseases cause a periodic outbreak of diseases which leads to large-scale death. These problems need to be solved at the initial stage, to save life and money of people.
 Automatic detection of plant diseases is an important research topic as it may prove benefits in monitoring large fields of crops, and at very early stage itself it detects the symptoms of diseases means when they appear on plant leaves. Farm landowners and plant caretakers (say, in a nursery) could be benefited a lot with an early disease detection, in order to prevent the worse to come to their plants and let the human know what has to be done beforehand for the same to work accordingly, in order to prevent the worse to come to him too.
@@ -14,7 +24,10 @@ By this method, the plant diseases can be identified at the initial stage itself
 
 
 
-### Process
+## Working
+---
+[(Back to top)](#list-of-contents)
+
 In the initial step, the RGB images of all the leaf samples were picked up.
 The step-by-step procedure of the proposed system:
 
@@ -48,6 +61,8 @@ of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 
 ## Dataset creation
 ---
+[(Back to top)](#list-of-contents)
+
 In `leaf sampler` directory run:
 ```shell
 python leafdetectionALLsametype.py -i .
@@ -63,6 +78,8 @@ python leafdetectionALLmix.py -i .
 
 ## Running
 ---
+[(Back to top)](#list-of-contents)
+
 Run the following code:
 ```shell
 python main.py -i testimage/{imagefile}
@@ -77,12 +94,17 @@ The code runs on two files:
 
 
 ## Links
+----
+[(Back to top)](#list-of-contents)
+
 - Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
 - Issue tracker: https://github.com/johri002/Automatic-leaf-infection-identifier/issues
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
 
 
 
-## Licensing
+## License
 ---
+[(Back to top)](#list-of-contents)
+
 The code in this project is licensed under MIT license.
