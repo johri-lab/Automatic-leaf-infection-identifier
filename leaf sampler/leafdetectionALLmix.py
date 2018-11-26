@@ -49,7 +49,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to image directory")
 args =vars(ap.parse_args())
 print "\n*********************\nImage Directory : " + args['input'] + "\n*********************"
-filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg")]
+filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg") or x.endswith(".JPG") or x.endswith(".JPEG") or x.endswith(".jpeg") or x.endswith(".png") or x.endswith(".PNG")]
 
 y,Y,yes,n,N,no = 1,1,1,0,0,0
 confirm = input('The code will run for complete folder. Do you really want to continue(Y/N)?')
