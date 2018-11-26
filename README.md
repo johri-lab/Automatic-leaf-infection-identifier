@@ -13,8 +13,8 @@ The project involves the use of self-designed image processing algorithms and te
 By this method, the plant diseases can be identified at the initial stage itself and the pest and infection control tools can be used to solve pest problems while minimizing risks to people and the environment.
 
 
-### Process
 
+### Process
 In the initial step, the RGB images of all the leaf samples were picked up.
 The step-by-step procedure of the proposed system:
 
@@ -45,9 +45,9 @@ All further image processing are done over a region of interest (ROI) defined at
 From the previous results we analyze and evaluate the features like area of the leaf, percentage(%) of the leaf infected, perimeter
 of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 
+
 ## Dataset creation
 ---
-
 In `leaf sampler` directory run:
 ```shell
 python leafdetectionALLautoupdater.py -i .
@@ -58,7 +58,6 @@ for running on all same time of images (say, all images are infected) in the wor
 
 ## Running
 ---
-
 Run the following code:
 ```shell
 python main.py -i testimage/{imagefile}
@@ -70,11 +69,12 @@ The code runs on two files:
 + Second, `classifier.py` is called in `main.py` for classifying the leaf in the input image as "infected" or "healthy".
 
 
-## Links
 
+## Links
 - Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
 - Issue tracker: https://github.com/johri002/Automatic-leaf-infection-identifier/issues
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
+
 
 
 ## Licensing
