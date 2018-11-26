@@ -57,7 +57,8 @@ OR
 python leafdetectionALLmix.py -i .
 ```
 `leafdetectionALLsametype.py` for running on one same category of images (say, all images are infected) and `leafdetectionALLmix.py` for creating dataset for both category (infected/healthy) of leaf images, in the working directory.
-**Note**: The code runs for all .jpg images in the specified directory.
+*Note: The code is set to run for all `.jpg`,`.jpeg` and `.png` file format images only, present in the specified directory.
+       If you wish, you can add more file format support by intoducing it in the conditional statement of line 52 of both the        files.*
 
 
 ## Running
