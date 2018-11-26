@@ -50,10 +50,14 @@ of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 ---
 In `leaf sampler` directory run:
 ```shell
-python leafdetectionALLautoupdater.py -i .
+python leafdetectionALLsametype.py -i .
 ```
-for running on all same time of images (say, all images are infected) in the working directory.
-
+OR
+```shell
+python leafdetectionALLmix.py -i .
+```
+`leafdetectionALLsametype.py` for running on one same category of images (say, all images are infected) and `leafdetectionALLmix.py` for creating dataset for both category (infected/healthy) of leaf images, in the working directory.
+**Note**: The code runs for all .jpg images in the specified directory.
 
 
 ## Running
