@@ -172,19 +172,18 @@ cv2.imshow('orig',original)
 """****************************************update dataset*******************************************"""
 #Updating a dataset file to maintain log of the leaf images identified. 
 
-print("\nDo you want to update the dataset file with the above results(Y/N):")
+print("\nDo you want to run the classifier(Y/N):")
 n = cv2.waitKey(0) & 0xFF
 
 #import csv file library 
 import csv
 
-fortnum = 0
-filename = 'datasetlog/Datasetunlabelled.csv' 
+filename = 'datasetlog/Datasetunlabelledlog.csv' 
 while True:	
 	if  n == ord('y'or'Y'):
 		
 		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
-		L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+		
 		
 		print 'Appending to ' + str(filename)+ '...' 
 		
@@ -209,7 +208,7 @@ while True:
 				fortnum = 0
 			file.close(File)
 			
-			
+			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}	
 			
 			with open(filename,'a') as File:
 				
@@ -220,6 +219,10 @@ while True:
 				file.close(File)
 			
 		except IOError:
+
+			fortnum = 0
+			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+
 			with open(filename,'w') as File:
 				
 				writer = csv.DictWriter(File, fieldnames = fieldnames)

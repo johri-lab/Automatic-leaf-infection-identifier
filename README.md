@@ -1,10 +1,22 @@
 # Automatic leaf infection identification
 
+
 [![Join the chat at https://gitter.im/Automatic-leaf-infection-identification/Lobby](https://badges.gitter.im/Automatic-leaf-infection-identification/Lobby.svg)](https://gitter.im/Automatic-leaf-infection-identification/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+### List of contents
+
+- [Introduction](#introduction)
+- [Working](#working)
+- [Dataset creation](#dataset-creation)
+- [Running](#running)
+- [License](#license)
+
 
 
 ## Introduction
 ---
+[(Back to top)](#list-of-contents)
+
 Since, disease detection in plants plays an important role in the agriculture field, as having a disease in plants are quite natural. If proper care is not taken in this area then it can cause serious effects on plants and due to which respective product quality, quantity or productivity is also affected.
 Plant diseases cause a periodic outbreak of diseases which leads to large-scale death. These problems need to be solved at the initial stage, to save life and money of people.
 Automatic detection of plant diseases is an important research topic as it may prove benefits in monitoring large fields of crops, and at very early stage itself it detects the symptoms of diseases means when they appear on plant leaves. Farm landowners and plant caretakers (say, in a nursery) could be benefited a lot with an early disease detection, in order to prevent the worse to come to their plants and let the human know what has to be done beforehand for the same to work accordingly, in order to prevent the worse to come to him too.
@@ -15,7 +27,10 @@ The project involves the use of self-designed image processing algorithms and te
 By this method, the plant diseases can be identified at the initial stage itself and the pest and infection control tools can be used to solve pest problems while minimizing risks to people and the environment.
 
 
-### Process
+
+## Working
+---
+[(Back to top)](#list-of-contents)
 
 In the initial step, the RGB images of all the leaf samples were picked up.
 The step-by-step procedure of the proposed system:
@@ -47,19 +62,27 @@ All further image processing are done over a region of interest (ROI) defined at
 From the previous results we analyze and evaluate the features like area of the leaf, percentage(%) of the leaf infected, perimeter
 of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 
+
 ## Dataset creation
 ---
+[(Back to top)](#list-of-contents)
 
 In `leaf sampler` directory run:
 ```shell
-python leafdetectionALLautoupdater.py -i .
+python leafdetectionALLsametype.py -i .
 ```
-for running on all same time of images (say, all images are infected) in the working directory.
-
+OR
+```shell
+python leafdetectionALLmix.py -i .
+```
+`leafdetectionALLsametype.py` for running on one same category of images (say, all images are infected) and `leafdetectionALLmix.py` for creating dataset for both category (infected/healthy) of leaf images, in the working directory.
+*Note: The code is set to run for all `.jpg`,`.jpeg` and `.png` file format images only, present in the specified directory.
+       If you wish, you can add more file format support by intoducing it in the conditional statement of line 52 of both the        files.*
 
 
 ## Running
 ---
+[(Back to top)](#list-of-contents)
 
 Run the following code:
 ```shell
@@ -71,14 +94,21 @@ The code runs on two files:
 + First, `main.py` for image segmentatin and feature extraction.
 + Second, `classifier.py` is called in `main.py` for classifying the leaf in the input image as "infected" or "healthy".
 
+![leafdetection](https://user-images.githubusercontent.com/30645315/49014339-cb72db00-f1a5-11e8-9ceb-4010a860e162.gif)
+
 
 ## Links
+----
+[(Back to top)](#list-of-contents)
 
 - Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
 - Issue tracker: https://github.com/johri002/Automatic-leaf-infection-identifier/issues
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
 
 
-## Licensing
+
+## License
 ---
-The code in this project is licensed under MIT license.
+[(Back to top)](#list-of-contents)
+
+The code in this project is licensed under the MIT license 2018 - Shikhar Johri.

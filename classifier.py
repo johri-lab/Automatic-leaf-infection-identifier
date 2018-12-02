@@ -13,7 +13,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 dataf = pd.read_csv("Datasetinfectedhealthy.csv")
 
 # extracting two features
-X = dataf.drop(['imgid','fortnum','feature3'], axis=1)
+X = dataf.drop(['imgid','fortnum'], axis=1)
 y = X['label']
 X = X.drop('label', axis=1)
 
@@ -21,17 +21,18 @@ print "\nTraining dataset:-\n"
 print X
 
 
-log = pd.read_csv("datasetlog/Datasetunlabelled.csv")
+log = pd.read_csv("datasetlog/Datasetunlabelledlog.csv")
 
 log = log.tail(1)
-X_ul = log.drop(['imgid','fortnum','feature3'], axis=1)
+X_ul = log.drop(['imgid','fortnum'], axis=1)
 
 print "\nTest dataset:-\n"
 print X_ul
 
 
-X.plot(kind='scatter',x='feature1',y='feature2')
-plt.show()
+#X.plot(kind='scatter',x='feature1',y='feature2')
+#plt.show()
+
 
 Sum = 0
 from sklearn.model_selection import train_test_split  
