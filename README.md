@@ -1,5 +1,8 @@
 # Automatic leaf infection identification
 
+
+[![Join the chat at https://gitter.im/Automatic-leaf-infection-identification/Lobby](https://badges.gitter.im/Automatic-leaf-infection-identification/Lobby.svg)](https://gitter.im/Automatic-leaf-infection-identification/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### List of contents
 
 - [Introduction](#introduction)
@@ -7,6 +10,7 @@
 - [Dataset creation](#dataset-creation)
 - [Running](#running)
 - [License](#license)
+
 
 
 ## Introduction
