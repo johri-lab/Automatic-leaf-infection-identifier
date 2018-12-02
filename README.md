@@ -104,7 +104,7 @@ The code runs on two files:
 - Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
 - Issue tracker: https://github.com/johri002/Automatic-leaf-infection-identifier/issues
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
-
+- Site: https://johri002.github.io/Automatic-leaf-infection-identifier/
 
 
 ## License
