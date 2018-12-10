@@ -51,7 +51,7 @@ It also uses the concepts of machine learning
 
 
 #### Summary
-By this method, the plant diseases can be identified at the initial stage itself and the pest and infection control tools can be used to solve pest problems while minimizing risks to people and the environment.
+By using this method, the plant diseases can be identified at the initial stage itself and the pest and infection control tools can be used to solve pest problems while minimizing risks to people and the environment.
 
 
 ---
