@@ -132,9 +132,9 @@ The code runs on two files:
 
 ![leafdetection](https://user-images.githubusercontent.com/30645315/49014339-cb72db00-f1a5-11e8-9ceb-4010a860e162.gif)
 
+---
 
 ## Links
-----
 [(Back to top)](#list-of-contents)
 
 - Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
@@ -142,9 +142,10 @@ The code runs on two files:
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
 - Site: https://johri002.github.io/Automatic-leaf-infection-identifier/
 
+---
 
 ## License
----
+
 [(Back to top)](#list-of-contents)
 
 The code in this project is licensed under the MIT license 2018 - Shikhar Johri.
