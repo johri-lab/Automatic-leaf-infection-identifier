@@ -5,12 +5,12 @@ import os,sys
 import time
 
 def endprogram():
-	print "\nProgram terminated!"
+	print ("\nProgram terminated!")
 	sys.exit()
 	
 	
 def clear():
-	os.system('clear')
+	(os.system('clear'))
 
 	
 def progressbar():
@@ -48,7 +48,7 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to image directory")
 args =vars(ap.parse_args())
-print "\n*********************\nImage Directory : " + args['input'] + "\n*********************"
+print ("\n*********************\nImage Directory : " + args['input'] + "\n*********************")
 filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg") or x.endswith(".JPG") or x.endswith(".JPEG") or x.endswith(".jpeg") or x.endswith(".png") or x.endswith(".PNG")]
 
 y,Y,yes,n,N,no = 1,1,1,0,0,0
@@ -57,19 +57,19 @@ cv2.namedWindow('original')
 timer = 0
 if confirm == 1:
 	for Fid in range(len(filepath)):
-		print'\nProcessing images...'
+		print('\nProcessing images...')
 		progressbar()
-		print '\n For a quick start press(s)'
+		print ('\n For a quick start press(s)')
 		if cv2.waitKey(1) == ord('s'):
 			timer = timer/10		
 		time.sleep(0)
 		clear()
 elif confirm == 0:
-	print '\nProcess terminated by the user!'
+	print ('\nProcess terminated by the user!')
 	endprogram()
 
 else:
-	print 'Invalid input by the user!' 
+	print ('Invalid input by the user!' )
 	endprogram()
 	
 
@@ -82,7 +82,7 @@ if  detection == 1:
 elif detection == 0 :
 	labelling = 0
 else:
-	print "Invalid input!"
+	print ("Invalid input!")
 	endprogram()
 
 
@@ -91,7 +91,7 @@ for Fid in range(len(filepath)):
 	time.sleep(1)
 	clear()
 	progressbar()
-	print "\nImage: " + str(filepath[Fid])
+	print ("\nImage: " + str(filepath[Fid]))
 	img = cv2.imread(filepath[Fid])
 	img = cv2.resize(img,(275,183))
 	original = img.copy()
@@ -230,16 +230,16 @@ for Fid in range(len(filepath)):
 	if Infarea > Tarea:
 		Tarea = roi.shape[0]*roi.shape[1]
 
-	print '___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|'
+	print ('___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|')
 	
-	print '_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|'
+	print ('_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|')
 	
 	#Finding the percentage of infection in the leaf
-	print '________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|'
+	print ('________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|')
 
 	per = 100 * Infarea/Tarea
 
-	print '_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|'
+	print ('_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|')
 	
 	
 
@@ -253,7 +253,7 @@ for Fid in range(len(filepath)):
 	
 	while True:	
 		
-		print 'Appending to '+ str(filename)+ '...' 
+		print ('Appending to '+ str(filename)+ '...')
 		
 		if labelling==0:
 			print("\nIt is set as healthy!")
@@ -307,7 +307,7 @@ for Fid in range(len(filepath)):
 				file.close(File)
 		
 		finally:
-			print '\nFile '+ str(filename)+ ' updated!'
+			print ('\nFile '+ str(filename)+ ' updated!')
 			break
 		
 		if n == ord('q' or 'Q'):

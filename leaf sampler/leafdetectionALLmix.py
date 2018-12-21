@@ -5,7 +5,7 @@ import os,sys
 import time
 
 def endprogram():
-	print "\nProgram terminated!"
+	print ("\nProgram terminated!")
 	sys.exit()
 	
 	
@@ -48,7 +48,7 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to image directory")
 args =vars(ap.parse_args())
-print "\n*********************\nImage Directory : " + args['input'] + "\n*********************"
+print ("\n*********************\nImage Directory : " + args['input'] + "\n*********************")
 filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg") or x.endswith(".JPG") or x.endswith(".JPEG") or x.endswith(".jpeg") or x.endswith(".png") or x.endswith(".PNG")]
 
 y,Y,yes,n,N,no = 1,1,1,0,0,0
@@ -57,24 +57,24 @@ confirm = input('The code will run for complete folder. Do you really want to co
 
 if confirm == 1:
 	for Fid in range(len(filepath)):
-		print'\nProcessing images...'
+		print('\nProcessing images...')
 		progressbar()
-		print '\n For a quick start press (s)'
+		print ('\n For a quick start press (s)')
 		time.sleep(0.01)
 		clear()
 elif confirm == 0:
-	print '\nProcess terminated by the user!'
+	print ('\nProcess terminated by the user!')
 	endprogram()
 
 else:
-	print 'Invalid input by the user!' 
+	print ('Invalid input by the user!')
 	endprogram()
 	
 for Fid in range(len(filepath)):	
 	time.sleep(1)
 	clear()
 	progressbar()
-	print "\nImage: " + str(filepath[Fid])
+	print ("\nImage: " + str(filepath[Fid]))
 	img = cv2.imread(filepath[Fid])
 	img = cv2.resize(img,(275,183))
 	original = img.copy()
@@ -213,16 +213,16 @@ for Fid in range(len(filepath)):
 	if Infarea > Tarea:
 		Tarea = roi.shape[0]*roi.shape[1]
 
-	print '___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|'
+	print ('___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|')
 	
-	print '_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|'
+	print ('_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|')
 	
 	#Finding the percentage of infection in the leaf
-	print '________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|'
+	print ('________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|')
 
 	per = 100 * Infarea/Tarea
 
-	print '_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|'
+	print ('_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|')
 	
 	
 	print("\nDo you want to update the dataset file with the above results(Y/N):")
@@ -232,7 +232,7 @@ for Fid in range(len(filepath)):
 	
 	while True:	
 		if  n == ord('y'or'Y'):
-			print 'Appending to '+ str(filename)+ '...'  
+			print ('Appending to '+ str(filename)+ '...')
 			print("\nIs it infected or not(Y/N)?:")
 			detection = cv2.waitKey(0) & 0xFF
 			
@@ -246,7 +246,7 @@ for Fid in range(len(filepath)):
 
 					
 			else:
-				print "Invalid input!"
+				print ("Invalid input!")
 				break
 			
 			fieldnames = ['fortnum', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
@@ -298,17 +298,17 @@ for Fid in range(len(filepath)):
 					file.close(File)
 
 			finally:
-				print '\nFile '+ str(filename)+ ' updated!'
+				print ('\nFile '+ str(filename)+ ' updated!')
 				break
 
 			
 		elif n == ord('n' or 'N') :
-			print '\nFile not updated!'
+			print ('\nFile not updated!')
 			break
 
 		elif n == ord('q' or 'Q'):
 			endprogram()
 			
 		else:
-			print '\nInvalid input!'
+			print ('\nInvalid input!')
 			break

@@ -7,10 +7,10 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to input image")
 args =vars(ap.parse_args())
-print "\n*********************\nImage : " + args['input'] + "\n*********************"
+print ("\n*********************\nImage : " + args['input'] + "\n*********************")
 img = cv2.imread(args["input"])
 
-img = cv2.resize(img ,(img.shape[1]/5,img.shape[0]/5))
+img = cv2.resize(img ,((int)(img.shape[1]/5),(int)(img.shape[0]/5)))
 original = img.copy()
 neworiginal = img.copy() 
 cv2.imshow('original',img)
@@ -68,7 +68,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-_, contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -76,7 +76,7 @@ for x in range(len(contours)):													#if take max or one less than max the
 		maxC = len(contours[x])
 		maxid = x
 
-perimeter= cv2.arcLength(contours[maxid],True)
+perimeter = cv2.arcLength(contours[maxid],True)
 #print perimeter
 Tarea = cv2.contourArea(contours[maxid])
 cv2.drawContours(neworiginal,contours[maxid],-1,(0,0,255))
@@ -151,10 +151,10 @@ for x in range(len(contours)):
 if Infarea > Tarea:
 	Tarea = img.shape[0]*img.shape[1]
 
-print '_______________________\n| Total area: ' + str(Tarea) + '   |\n|_____________________|'
+print ('_______________________\n| Total area: ' + str(Tarea) + '   |\n|_____________________|')
 
 #Finding the percentage of infection in the leaf
-print '\n__________________________\n| Infected area: ' + str(Infarea) + ' |\n|________________________|'
+print ('\n__________________________\n| Infected area: ' + str(Infarea) + ' |\n|________________________|')
 
 try:
 	per = 100 * Infarea/Tarea
@@ -162,7 +162,7 @@ try:
 except ZeroDivisionError:
 	per = 0
 
-print '\n_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|'
+print ('\n_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|')
 
 
 cv2.imshow('orig',original)
@@ -185,9 +185,9 @@ while True:
 		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
 		
 		
-		print 'Appending to ' + str(filename)+ '...' 
+		print ('Appending to ' + str(filename)+ '...')
 		
-		print '\nFile ' + str(filename)+ ' updated!' 
+		print ('\nFile ' + str(filename)+ ' updated!' )
 		
 		try:
 			results = []
@@ -240,9 +240,9 @@ while True:
 
 			
 	elif n == ord('n' or 'N') :
-		print 'File not updated! \nSuccessfully terminated!'
+		print ('File not updated! \nSuccessfully terminated!')
 		break
 	
 	else:
-		print 'invalid input!'
+		print ('invalid input!')
 		break
