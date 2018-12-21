@@ -45,7 +45,7 @@ for n in range(4):
 	Sum = Sum + pred
 	print(pred)
 
-print("\nprediction:",Sum)
+print("\nprediction:" + str(Sum/4))
 
 if(Sum < 2):
 	print("The leaf is sufficiently healthy!")
