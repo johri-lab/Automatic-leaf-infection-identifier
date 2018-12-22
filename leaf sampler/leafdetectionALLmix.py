@@ -51,30 +51,30 @@ args =vars(ap.parse_args())
 print ("\n*********************\nImage Directory : " + args['input'] + "\n*********************")
 filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg") or x.endswith(".JPG") or x.endswith(".JPEG") or x.endswith(".jpeg") or x.endswith(".png") or x.endswith(".PNG")]
 
-y,Y,yes,n,N,no = 1,1,1,0,0,0
-confirm = input('The code will run for complete folder. Do you really want to continue(Y/N)?')
+response = input('The code will run for complete folder. Do you really want to continue(Y/N)?')
+#defining considered input values of yes/no
+valid={"yes": True, "y":True, "Y":True, "Yes":True, "YES":True,
+             "no": False, "n": False, 'N':False, 'No':False, "NO":False}
+
 #filename = input('\nEnter the file name you wish to update/create:')
 
-if confirm == 1:
-	for Fid in range(len(filepath)):
-		print('\nProcessing images...')
-		progressbar()
-		print ('\n For a quick start press (s)')
-		time.sleep(0.01)
-		clear()
-elif confirm == 0:
+if response not in valid:
+	print('\nInvalid input by the user!')
+	endprogram()
+
+elif valid[response]:
+	print('\nProcessing images...')
+
+elif ~valid[response]:
 	print ('\nProcess terminated by the user!')
 	endprogram()
 
-else:
-	print ('Invalid input by the user!')
-	endprogram()
 	
 for Fid in range(len(filepath)):	
 	time.sleep(1)
 	clear()
 	progressbar()
-	print ("\nImage: " + str(filepath[Fid]))
+	print ("Image: " + str(filepath[Fid]))
 	img = cv2.imread(filepath[Fid])
 	img = cv2.resize(img,(275,183))
 	original = img.copy()
@@ -213,19 +213,24 @@ for Fid in range(len(filepath)):
 	if Infarea > Tarea:
 		Tarea = roi.shape[0]*roi.shape[1]
 
-	print ('___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|')
+	print ('_________________________________________\n Perimeter: %.2f' %(perimeter) 
+		   + '\n_________________________________________')
 	
-	print ('_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|')
+	print ('_________________________________________\n Total area: %.2f' %(Tarea) 
+		   + '\n_________________________________________')
 	
 	#Finding the percentage of infection in the leaf
-	print ('________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|')
+	print ('_________________________________________\n Infected area: %.2f' %(Infarea) 
+		   + '\n_________________________________________')
 
 	per = 100 * Infarea/Tarea
 
-	print ('_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|')
+	print ('_________________________________________\n Percentage of infection region: %.2f' %(per) 
+		   + '\n_________________________________________')
 	
 	
-	print("\nDo you want to update the dataset file with the above results(Y/N):")
+	print("*To terminate press (q)*")
+	print("\nDo you want to update the dataset file with the above results \n(press [Y/N] key on image)")
 	n = cv2.waitKey(0) & 0xFF
 	import csv
 	filename = 'datasetleafmixed.csv'
@@ -233,16 +238,16 @@ for Fid in range(len(filepath)):
 	while True:	
 		if  n == ord('y'or'Y'):
 			print ('Appending to '+ str(filename)+ '...')
-			print("\nIs it infected or not(Y/N)?:")
+			print("Is it infected or not (press [Y/N] key on image)?")
 			detection = cv2.waitKey(0) & 0xFF
 			
 			if  detection == ord('y'or'Y'):
 					labelling = 1
-					print("\nIt is set as infected!")
+					print("It is set as infected!")
 					
 			elif detection == ord('n' or 'N') :
 					labelling = 0
-					print("\nIt is set as healthy!")
+					print("It is set as healthy!")
 
 					
 			else:
@@ -298,17 +303,17 @@ for Fid in range(len(filepath)):
 					file.close(File)
 
 			finally:
-				print ('\nFile '+ str(filename)+ ' updated!')
+				print ('File '+ str(filename)+ ' updated!')
 				break
 
 			
 		elif n == ord('n' or 'N') :
-			print ('\nFile not updated!')
+			print ('File not updated!')
 			break
 
 		elif n == ord('q' or 'Q'):
 			endprogram()
 			
 		else:
-			print ('\nInvalid input!')
+			print ('Invalid input!')
 			break

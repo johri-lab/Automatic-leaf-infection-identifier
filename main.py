@@ -1,8 +1,12 @@
 import cv2
 import numpy as np           
-import argparse
+import argparse, sys, os
 
-	
+def endprogram():
+	print ("\nProgram terminated!")
+	sys.exit()
+
+
 #Reading the image by parsing the argument 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to input image")
@@ -68,7 +72,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+ret,contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -151,22 +155,28 @@ for x in range(len(contours)):
 if Infarea > Tarea:
 	Tarea = img.shape[0]*img.shape[1]
 
-print ('_______________________\n| Total area: ' + str(Tarea) + '   |\n|_____________________|')
+print ('_________________________________________\n Perimeter: %.2f' %(perimeter) 
+	   + '\n_________________________________________')
+
+print ('_________________________________________\n Total area: %.2f' %(Tarea) 
+	   + '\n_________________________________________')
 
 #Finding the percentage of infection in the leaf
-print ('\n__________________________\n| Infected area: ' + str(Infarea) + ' |\n|________________________|')
+print ('_________________________________________\n Infected area: %.2f' %(Infarea) 
+	   + '\n_________________________________________')
 
 try:
 	per = 100 * Infarea/Tarea
-
 except ZeroDivisionError:
 	per = 0
 
-print ('\n_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|')
+print ('_________________________________________\n Percentage of infection region: %.2f' %(per) 
+	   + '\n_________________________________________')
 
+
+print("\n*To terminate press and hold (q)*")
 
 cv2.imshow('orig',original)
-
 
 
 """****************************************update dataset*******************************************"""
@@ -174,6 +184,10 @@ cv2.imshow('orig',original)
 
 print("\nDo you want to run the classifier(Y/N):")
 n = cv2.waitKey(0) & 0xFF
+
+if n == ord('q' or 'Q'):
+	endprogram()
+
 
 #import csv file library 
 import csv
@@ -219,7 +233,7 @@ while True:
 				file.close(File)
 			
 		except IOError:
-
+			os.system('mkdir datasetlog')
 			fortnum = 0
 			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
 
