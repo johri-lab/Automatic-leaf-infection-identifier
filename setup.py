@@ -17,7 +17,7 @@ setup(
 	author= 'Shikhar Johri',
 	author_email= 'shikharjohri123@gmail.com',
 	url= 'https://johri002.github.io/Automatic-leaf-infection-identifier/',
-	description = "The project involves the use of self-designed image processing algorithms and techniques designed using python to segment the disease from the leaf while using the concepts of machine learning to categorise the plant leaves as healthy or infected.",
+	description = "The project involves the use of self-designed image processing algorithms and \ntechniques designed using python to segment the disease from the leaf while \nusing the concepts of machine learning to categorise the plant leaves as \nhealthy or infected.",
 	long_description = long_description,
 #Listing Dependencies that it has
 	install_requires = requirements,
