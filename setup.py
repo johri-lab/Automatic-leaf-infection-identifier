@@ -6,16 +6,16 @@ requirements = ['numpy', 'matplotlib', 'pandas', 'sklearn', 'opencv-python', 'ar
 with open("README.md") as f:
 	long_description=f.read()
 setup(
-    name='Automatic-leaf-infection-identifier ',
-    version = '0.1.0',
-    author= 'Shikhar Johri',
-    author_email= 'shikharjohri123@gmail.com',
-    url= 'https://github.com/johri002/Automatic-leaf-infection-identifier',
-    long_description long_description,
+	name='Automatic-leaf-infection-identifier ',
+	version = '0.1.0',
+	author= 'Shikhar Johri',
+	author_email= 'shikharjohri123@gmail.com',
+	url= 'https://github.com/johri002/Automatic-leaf-infection-identifier',
+	long_description = long_description,
 #Listing Dependencies that it has
-    install_requires = requirements
+	install_requires = requirements,
 #LICENSE Info
-    license= 'LICENSE',
+	license= 'LICENSE',
 #INFO about where package can run
 classifiers=[
 'Intended Audience :: Developers',
@@ -26,11 +26,5 @@ classifiers=[
 'Programming Language :: Python :: 3.3',
 'Operating System :: Windows',
 'Operating System :: Linux',
-],
-#Finding package in a search
-   	#keywords='example project'
-	#packages=find_packages(exclude=['docs','tests*']
-#Shipping extra data with package(that is not a python code)
-	#package_data={	
-	#'sample':['package_data.dat']
-	#}
+]
+)
