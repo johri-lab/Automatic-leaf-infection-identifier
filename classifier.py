@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# import support vector classifier
+# import required libraries
 from sklearn.svm import SVC 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
