@@ -36,7 +36,10 @@ In the initial step, the RGB images of all the leaf samples were picked up.
 The step-by-step procedure of the proposed system:
 
 + RGB image acquisition;
-+ Convert the input image from RGB to HSI format;
++ Convert the input image from RGB to HSI format:                                                                 
+
+![RGB](https://github.com/loveteshh/Automatic-leaf-infection-identifier/blob/master/leaf%20sampler/leaf5.jpg)  :arrow_right: ![HSI]( https://github.com/loveteshh/Automatic-leaf-infection-identifier/blob/master/leaf%20sampler/leaf5_hsi.jpg)
+
 + Masking the green-pixels;
 + Removal of masked green pixels;
 + Segment the components;
