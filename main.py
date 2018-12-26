@@ -7,6 +7,11 @@ def endprogram():
 	sys.exit()
 
 
+#Integrating with GUI interface
+import BasicGUI
+BasicGUI.main()
+
+
 #Reading the image by parsing the argument 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to input image")
