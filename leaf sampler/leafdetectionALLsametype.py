@@ -5,12 +5,12 @@ import os,sys
 import time
 
 def endprogram():
-	print "\nProgram terminated!"
+	print ("\nProgram terminated!")
 	sys.exit()
 	
 	
 def clear():
-	os.system('clear')
+	(os.system('clear'))
 
 	
 def progressbar():
@@ -48,50 +48,48 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to image directory")
 args =vars(ap.parse_args())
-print "\n*********************\nImage Directory : " + args['input'] + "\n*********************"
+print ("\n*********************\nImage Directory : " + args['input'] + "\n*********************")
 filepath = [x for x in os.listdir(args['input']) if x.endswith(".jpg") or x.endswith(".JPG") or x.endswith(".JPEG") or x.endswith(".jpeg") or x.endswith(".png") or x.endswith(".PNG")]
 
-y,Y,yes,n,N,no = 1,1,1,0,0,0
-confirm = input('The code will run for complete folder. Do you really want to continue(Y/N)?')
-cv2.namedWindow('original')
-timer = 0
-if confirm == 1:
-	for Fid in range(len(filepath)):
-		print'\nProcessing images...'
-		progressbar()
-		print '\n For a quick start press(s)'
-		if cv2.waitKey(1) == ord('s'):
-			timer = timer/10		
-		time.sleep(0)
-		clear()
-elif confirm == 0:
-	print '\nProcess terminated by the user!'
+response = input('The code will run for complete folder. Do you really want to continue(Y/N)?')
+#dictionary defining considered input values of yes/no
+valid={"yes": True, "y":True, "Y":True, "Yes":True, "YES":True,
+             "no": False, "n": False, 'N':False, 'No':False, "NO":False}
+
+if response not in valid:
+	print('\nInvalid input by the user!')
 	endprogram()
 
-else:
-	print 'Invalid input by the user!' 
-	endprogram()
-	
+elif valid[response]:
+	print('\nProcessing images...')
 
-detection = input("Are the leaf images infected or not(Y/N)?:")
+elif ~valid[response]:
+	print ('\nProcess terminated by the user!')
+	endprogram()
+
+#filename = input('\nEnter the file name you wish to update/create:')
+
+
+response = input("\nAre the leaf images infected or not(Y/N)?:")
 
 Tarea,per,perimeter = 0,0,0
 
-if  detection == 1:
-	labelling = 1
-elif detection == 0 :
-	labelling = 0
-else:
-	print "Invalid input!"
+if response not in valid:
+	print ("\nInvalid input!")
 	endprogram()
 
+elif valid[response]:
+	labelling = 1
+
+elif ~valid[response]:
+	labelling = 0
 
 
 for Fid in range(len(filepath)):	
 	time.sleep(1)
 	clear()
 	progressbar()
-	print "\nImage: " + str(filepath[Fid])
+	print ("\nImage: " + str(filepath[Fid]))
 	img = cv2.imread(filepath[Fid])
 	img = cv2.resize(img,(275,183))
 	original = img.copy()
@@ -230,35 +228,41 @@ for Fid in range(len(filepath)):
 	if Infarea > Tarea:
 		Tarea = roi.shape[0]*roi.shape[1]
 
-	print '___________________________\n| Perimeter: ' + str(perimeter) + ' |\n|_________________________|'
+	print ('_________________________________________\n Perimeter: %.2f' %(perimeter) 
+		   + '\n_________________________________________')
 	
-	print '_______________________\n| Total area: ' + str(Tarea) + ' |\n|_____________________|'
+	print ('_________________________________________\n Total area: %.2f' %(Tarea) 
+		   + '\n_________________________________________')
 	
 	#Finding the percentage of infection in the leaf
-	print '________________________\n| Infected area: ' + str(Infarea) + ' |\n|______________________|'
+	print ('_________________________________________\n Infected area: %.2f' %(Infarea) 
+		   + '\n_________________________________________')
 
 	per = 100 * Infarea/Tarea
 
-	print '_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|'
+	print ('_________________________________________\n Percentage of infection region: %.2f' %(per) 
+		   + '\n_________________________________________')
 	
 	
-
+	print("\n*To terminate press and hold (q)*")
 	
-	n = cv2.waitKey(1) & 0xFF
-	
+	if cv2.waitKey(25) & 0xFF == ord('q' or 'Q'):
+			endprogram()
+			
+		
 	#import csv file library 
 	import csv
 	
 	filename = 'datasetsametype.csv'
 	
 	while True:	
-		
-		print 'Appending to '+ str(filename)+ '...' 
+				
+		print ('Appending to '+ str(filename)+ '...')
 		
 		if labelling==0:
-			print("\nIt is set as healthy!")
+			print("It is set as healthy!")
 		else:
-			print("\nIt is set as infected!")
+			print("It is set as infected!")
 
 		
 		fieldnames = ['fortnum', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
@@ -307,15 +311,6 @@ for Fid in range(len(filepath)):
 				file.close(File)
 		
 		finally:
-			print '\nFile '+ str(filename)+ ' updated!'
+			print ('\nFile '+ str(filename)+ ' updated!')
 			break
 		
-		if n == ord('q' or 'Q'):
-			endprogram()
-			
-		else:
-			print("\nTo terminate press and hold(q):")
-			break
-		
-		break
-	

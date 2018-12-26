@@ -1,16 +1,20 @@
 import cv2
 import numpy as np           
-import argparse
+import argparse, sys, os
 
-	
+def endprogram():
+	print ("\nProgram terminated!")
+	sys.exit()
+
+
 #Reading the image by parsing the argument 
 ap = argparse.ArgumentParser()
 ap.add_argument("-i","--input",required=True, help="path to input image")
 args =vars(ap.parse_args())
-print "\n*********************\nImage : " + args['input'] + "\n*********************"
+print ("\n*********************\nImage : " + args['input'] + "\n*********************")
 img = cv2.imread(args["input"])
 
-img = cv2.resize(img ,(img.shape[1]/5,img.shape[0]/5))
+img = cv2.resize(img ,((int)(img.shape[1]/5),(int)(img.shape[0]/5)))
 original = img.copy()
 neworiginal = img.copy() 
 cv2.imshow('original',img)
@@ -68,7 +72,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-_, contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+ret,contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -76,7 +80,7 @@ for x in range(len(contours)):													#if take max or one less than max the
 		maxC = len(contours[x])
 		maxid = x
 
-perimeter= cv2.arcLength(contours[maxid],True)
+perimeter = cv2.arcLength(contours[maxid],True)
 #print perimeter
 Tarea = cv2.contourArea(contours[maxid])
 cv2.drawContours(neworiginal,contours[maxid],-1,(0,0,255))
@@ -151,22 +155,28 @@ for x in range(len(contours)):
 if Infarea > Tarea:
 	Tarea = img.shape[0]*img.shape[1]
 
-print '_______________________\n| Total area: ' + str(Tarea) + '   |\n|_____________________|'
+print ('_________________________________________\n Perimeter: %.2f' %(perimeter) 
+	   + '\n_________________________________________')
+
+print ('_________________________________________\n Total area: %.2f' %(Tarea) 
+	   + '\n_________________________________________')
 
 #Finding the percentage of infection in the leaf
-print '\n__________________________\n| Infected area: ' + str(Infarea) + ' |\n|________________________|'
+print ('_________________________________________\n Infected area: %.2f' %(Infarea) 
+	   + '\n_________________________________________')
 
 try:
 	per = 100 * Infarea/Tarea
-
 except ZeroDivisionError:
 	per = 0
 
-print '\n_________________________________________________\n| Percentage of infection region: ' + str(per) + ' |\n|_______________________________________________|'
+print ('_________________________________________\n Percentage of infection region: %.2f' %(per) 
+	   + '\n_________________________________________')
 
+
+print("\n*To terminate press and hold (q)*")
 
 cv2.imshow('orig',original)
-
 
 
 """****************************************update dataset*******************************************"""
@@ -174,6 +184,10 @@ cv2.imshow('orig',original)
 
 print("\nDo you want to run the classifier(Y/N):")
 n = cv2.waitKey(0) & 0xFF
+
+if n == ord('q' or 'Q'):
+	endprogram()
+
 
 #import csv file library 
 import csv
@@ -185,9 +199,9 @@ while True:
 		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
 		
 		
-		print 'Appending to ' + str(filename)+ '...' 
+		print ('Appending to ' + str(filename)+ '...')
 		
-		print '\nFile ' + str(filename)+ ' updated!' 
+		print ('\nFile ' + str(filename)+ ' updated!' )
 		
 		try:
 			results = []
@@ -219,7 +233,7 @@ while True:
 				file.close(File)
 			
 		except IOError:
-
+			os.system('mkdir datasetlog')
 			fortnum = 0
 			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
 
@@ -240,9 +254,9 @@ while True:
 
 			
 	elif n == ord('n' or 'N') :
-		print 'File not updated! \nSuccessfully terminated!'
+		print ('File not updated! \nSuccessfully terminated!')
 		break
 	
 	else:
-		print 'invalid input!'
+		print ('invalid input!')
 		break

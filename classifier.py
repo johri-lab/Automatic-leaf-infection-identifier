@@ -36,7 +36,18 @@ print("\n*To terminate press (q)*")
 
 
 Sum = 0
+
 from sklearn.model_selection import train_test_split
+
+'''
+from sklearn.model_selection import train_test_split  
+for n in range(4):
+	x_train, Xi_test, y_train, yi_test = train_test_split(X, y, test_size=0.52, random_state=60)  
+	if cv2.waitKey(1) == ord('q' or 'Q'): break     
+	svclassifier = SVC(kernel='linear')  
+	svclassifier.fit(x_train, y_train)  
+	pred = svclassifier.predict(X_ul)
+'''
 for n in range(4):
 	x_train, Xi_test, y_train, yi_test = train_test_split(X, y, test_size=0.52, random_state=60)
 	if cv2.waitKey(1) == ord('q' or 'Q'): break
