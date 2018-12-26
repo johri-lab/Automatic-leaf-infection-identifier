@@ -182,19 +182,21 @@ cv2.imshow('orig',original)
 """****************************************update dataset*******************************************"""
 #Updating a dataset file to maintain log of the leaf images identified. 
 
-print("\nDo you want to run the classifier(Y/N):")
-n = cv2.waitKey(0) & 0xFF
+Y=y=yes=Yes=1
+N=n=no=No=0
 
-if n == ord('q' or 'Q'):
+print("\nDo you want to run the classifier(Y/N):")
+n =eval(input())
+
+if n == 0:
 	endprogram()
 
-
-#import csv file library 
+#import csv file library S
 import csv
 
 filename = 'datasetlog/Datasetunlabelledlog.csv' 
 while True:	
-	if  n == ord('y'or'Y'):
+	if  n == 1:#ord('y'or'Y'):
 		
 		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
 		
@@ -220,7 +222,7 @@ while True:
 				fortnum = preflod + 1
 			elif preflod > 9:
 				fortnum = 0
-			file.close(File)
+			reader.close(File)
 			
 			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}	
 			
@@ -230,7 +232,7 @@ while True:
 				
 				writer.writerow(L)
 
-				file.close(File)
+				writer.close(File)
 			
 		except IOError:
 			os.system('mkdir datasetlog')
@@ -245,7 +247,7 @@ while True:
 		
 				writer.writerow(L)
 				
-				file.close(File)
+				writer.close(File)
 			
 		finally:
 						
@@ -253,7 +255,7 @@ while True:
 			break
 
 			
-	elif n == ord('n' or 'N') :
+	elif n == 0:#ord('n' or 'N') :
 		print ('File not updated! \nSuccessfully terminated!')
 		break
 	
