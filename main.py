@@ -182,13 +182,15 @@ cv2.imshow('orig',original)
 """****************************************update dataset*******************************************"""
 #Updating a dataset file to maintain log of the leaf images identified. 
 
-print("\nDo you want to run the classifier(1/0):")
-n =int(input())#cv2.waitKey(0) & 0xFF
+Y=y=yes=Yes=1
+N=n=no=No=0
 
-if n == 0:#ord('q' or 'Q'):
+print("\nDo you want to run the classifier(Y/N):")
+n =eval(input())
+
+if n == 0:
 	endprogram()
 
-#print("yes")
 #import csv file library S
 import csv
 
