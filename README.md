@@ -83,6 +83,11 @@ python leafdetectionALLmix.py -i .
 ---
 [(Back to top)](#list-of-contents)
 
+To install all dependencies, run 
+```
+pip install -r requirements.txt
+```
+
 Run the following code:
 ```shell
 python main.py -i testimage/{imagefile}
