@@ -9,13 +9,13 @@ dir_path = path.abspath(path.dirname(__file__))
 with open(path.join(dir_path, 'README.md'), encoding='utf-8') as f:
 	long_description = f.read()
 	
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()	
+with open(path.join(dir_path, 'requirements.txt'), encoding='utf-8') as f:
+	requirements = f.read().splitlines()
 
 #requirements will now be updated as a list which contains all the dependancies to be installed.
 
 setup(
-	name='Automatic-leaf-infection-identifier ',
+	name='Automatic-leaf-infection-identifier',
 	version = '1.0',
 	author= 'Shikhar Johri',
 	author_email= 'shikharjohri123@gmail.com',
