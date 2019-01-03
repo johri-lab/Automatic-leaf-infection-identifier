@@ -7,6 +7,7 @@
 
 - [Introduction](#introduction)
 - [Working](#working)
+- [Installation](#installation)
 - [Dataset creation](#dataset-creation)
 - [Running](#running)
 - [License](#license)
@@ -62,6 +63,30 @@ All further image processing is done over a region of interest (ROI) defined at 
 From the previous results we analyze and evaluate the features like the area of the leaf, percentage(%) of the leaf infected, the perimeter of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 
 
+## Installation
+---
+[(Back to top)](#list-of-contents)
+
+These instructions assume you have `git` installed for working with Github from command window.
+
+1. Clone the repository, and navigate to the downloaded folder. Follow below commands.
+```
+git clone https://github.com/johri002/Automatic-leaf-infection-identifier.git
+cd Automatic-leaf-infection-identifier
+```
+
+2. Install few required pip packages, which are specified in the requirements.txt file .
+```
+pip3 install -r requirements.txt
+```
+or
+```
+sudo python3 setup.py install
+```
+
+3. That's it. You are ready to test the application.
+
+
 ## Dataset creation
 ---
 [(Back to top)](#list-of-contents)
@@ -70,7 +95,7 @@ In `leaf sampler` directory run:
 ```shell
 python leafdetectionALLsametype.py -i .
 ```
-OR
+or
 ```shell
 python leafdetectionALLmix.py -i .
 ```
