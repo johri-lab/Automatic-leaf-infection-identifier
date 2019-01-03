@@ -8,8 +8,11 @@ dir_path = path.abspath(path.dirname(__file__))
 # Get the long description from the README file
 with open(path.join(dir_path, 'README.md'), encoding='utf-8') as f:
 	long_description = f.read()
+	
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()	
 
-requirements = ['numpy', 'matplotlib', 'pandas', 'sklearn', 'opencv-python', 'argparse']
+#requirements will now be updated as a list which contains all the dependancies to be installed.
 
 setup(
 	name='Automatic-leaf-infection-identifier ',
