@@ -288,6 +288,19 @@ p, li { white-space: pre-wrap; }
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00aaff;&quot;&gt;https://gitter.im/Automatic-leaf-infection-identification/Lobby&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="close">
+     <property name="geometry">
+      <rect>
+       <x>538</x>
+       <y>550</y>
+       <width>151</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close Application</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

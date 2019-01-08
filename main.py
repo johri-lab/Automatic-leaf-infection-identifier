@@ -9,8 +9,8 @@ def endprogram():
 
 
 #Reading the image by parsing the argument 
-text = str(filename)
-print ("\n*********************\nImage : " + filename + "\n*********************")
+text = str(filenam)
+print ("\n*********************\nImage : " + filenam + "\n*********************")
 img = cv2.imread(text)
 
 img = cv2.resize(img ,((int)(img.shape[1]/5),(int)(img.shape[0]/5)))
