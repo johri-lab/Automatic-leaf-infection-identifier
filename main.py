@@ -9,8 +9,8 @@ def endprogram():
 
 
 #Reading the image by parsing the argument 
-text = str(filenam)
-print ("\n*********************\nImage : " + filenam + "\n*********************")
+text = str(ImageFile)
+print ("\n*********************\nImage : " + ImageFile + "\n*********************")
 img = cv2.imread(text)
 
 img = cv2.resize(img ,((int)(img.shape[1]/5),(int)(img.shape[0]/5)))
@@ -71,7 +71,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+ret,contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -141,7 +141,7 @@ cv2.imshow('masked out img',mask)
 
 
 #Finding contours for all infected regions
-contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+_,contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 Infarea = 0
 for x in range(len(contours)):
