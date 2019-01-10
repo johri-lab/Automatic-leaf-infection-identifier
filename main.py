@@ -1,6 +1,7 @@
 import cv2
 import numpy as np           
 import argparse, sys, os
+from GUIdriver import *
 
 def endprogram():
 	print ("\nProgram terminated!")
@@ -8,11 +9,9 @@ def endprogram():
 
 
 #Reading the image by parsing the argument 
-ap = argparse.ArgumentParser()
-ap.add_argument("-i","--input",required=True, help="path to input image")
-args =vars(ap.parse_args())
-print ("\n*********************\nImage : " + args['input'] + "\n*********************")
-img = cv2.imread(args["input"])
+text = str(ImageFile)
+print ("\n*********************\nImage : " + ImageFile + "\n*********************")
+img = cv2.imread(text)
 
 img = cv2.resize(img ,((int)(img.shape[1]/5),(int)(img.shape[0]/5)))
 original = img.copy()
@@ -142,7 +141,7 @@ cv2.imshow('masked out img',mask)
 
 
 #Finding contours for all infected regions
-_, contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+_,contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 Infarea = 0
 for x in range(len(contours)):
