@@ -110,9 +110,9 @@ python leafdetectionALLmix.py -i .
 
 Run the following code:
 ```shell
-python main.py -i testimage/{imagefile}
+python3 GUIdriver.py
 ```
-*where {imagefile} is the name of the input image file*
+*where {Browse} is used to select the input image file for classifier*
 
 The code runs on two files:
 + First, `main.py` for image segmentatin and feature extraction.
