@@ -1,3 +1,6 @@
+![1268108 (1)](https://user-images.githubusercontent.com/30645315/68544440-37ffdd80-03e9-11ea-8acd-3f3f9b6fc8b3.png)
+
+
 # Automatic leaf infection identification
 
 
