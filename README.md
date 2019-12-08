@@ -80,6 +80,7 @@ cd Automatic-leaf-infection-identifier
 
 2. Install few required pip packages, which are specified in the requirements.txt file .
 ```
+pip install -r requirements.txt
 pip3 install -r requirements.txt
 ```
 or
