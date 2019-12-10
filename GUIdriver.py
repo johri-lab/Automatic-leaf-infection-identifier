@@ -1,13 +1,13 @@
 import sys
-from PyQt4 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
  
 qtCreatorFile = "design.ui" # Enter file here.
 global ImageFile
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
  
-class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 	def __init__(self):
-		QtGui.QMainWindow.__init__(self)
+		QtWidgets.QMainWindow.__init__(self)
 		Ui_MainWindow.__init__(self)
 		self.setupUi(self)
 		self.browse.clicked.connect(self.Test)
@@ -24,7 +24,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
 		self.destroy()
 
 if __name__ == "__main__":
-	app = QtGui.QApplication(sys.argv)
+	app = QtWidgets.QApplication(sys.argv)
 	window = MyApp()
 	window.show()
 	sys.exit(app.exec_())
