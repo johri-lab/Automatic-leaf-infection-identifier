@@ -82,6 +82,8 @@ cd Automatic-leaf-infection-identifier
 ```
 pip install -r requirements.txt
 pip3 install -r requirements.txt
+apt-cache search pyqt
+sudo apt-get install python-qt4
 ```
 or
 ```
