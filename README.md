@@ -23,6 +23,10 @@
 
 Since, disease detection in plants plays an important role in the agriculture field, as having a disease in plants are quite natural. If proper care is not taken in this area then it can cause serious effects on plants and due to which respective product quality, quantity or productivity is also affected.
 Plant diseases cause a periodic outbreak of diseases which leads to large-scale death. These problems need to be solved at the initial stage, to save life and money of people.
+A sign of plant disease is physical evidence of the pathogen.
+A symptom of a plant disease is a visible effect of disease on the plant. It may include detectable change in color, shape or function. Here we don't actually search for pathogen but the symptoms caused by it. Some common examples are leaf rust in corn and leaf spots.
+Therefore by diagnosing a leaf we have chance of minimizing losses and increase productivity.
+
 Automatic detection of plant diseases is an important research topic as it may prove benefits in monitoring large fields of crops, and at a very early stage itself it detects the symptoms of diseases means when they appear on plant leaves. Farm landowners and plant caretakers (say, in a nursery) could be benefited a lot with an early disease detection, in order to prevent the worse to come to their plants and let the human know what has to be done beforehand for the same to work accordingly, in order to prevent the worse to come to him too.
 
 This enables machine vision that is to provide image-based automatic inspection, process control. 
@@ -63,7 +67,7 @@ coloured branch of a leaf that may look like the disease) which have been consid
 All further image processing is done over a region of interest (ROI) defined at this stage.
 
 **Classification:**
-From the previous results we analyze and evaluate the features like the area of the leaf, percentage(%) of the leaf infected, the perimeter of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
+From the previous results, we train our code in python to analyze and evaluate the features like the area of the leaf, percentage(%) of the leaf infected, the perimeter of the leaf, etc., for all the leaf images, and pass it to the SVM classifier.
 
 
 ## Installation
