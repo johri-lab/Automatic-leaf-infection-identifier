@@ -8,11 +8,12 @@ def endprogram():
 	print ("\nProgram terminated!")
 	sys.exit()
 	
-	
-def clear():
-	(os.system('clear'))
+#A list is declared to store all the rows as ordered list	
+lst = []
 
-	
+#Declaring of the list containing all the headers of csv file
+fieldnames = ['fortnum', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
+
 def progressbar():
 	# Initial call to print 0% progress
 	#printProgressBar(i, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
@@ -42,7 +43,8 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     if iteration == total: 
         print()
 
-
+#Declaring a variable for storing index number of image 
+fortnum=0
 	
 #Reading the directory by parsing the argument 
 ap = argparse.ArgumentParser()
@@ -87,7 +89,9 @@ elif ~valid[response]:
 
 for Fid in range(len(filepath)):	
 	time.sleep(1)
-	clear()
+	#The following command is used to clear the screen in windows.
+	#For terminals use 'clear' instead of 'cls'
+	os.system('cls')
 	progressbar()
 	print ("\nImage: " + str(filepath[Fid]))
 	img = cv2.imread(filepath[Fid])
@@ -146,7 +150,7 @@ for Fid in range(len(filepath)):
 
 	#contour to find leafs
 	bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-	_, contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 	maxC = 0
 	for x in range(len(contours)):													
@@ -215,7 +219,7 @@ for Fid in range(len(filepath)):
 
 
 	#Finding contours for all infected regions
-	_, contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 	Infarea = 0
 	for x in range(len(contours)):
@@ -247,70 +251,36 @@ for Fid in range(len(filepath)):
 	print("\n*To terminate press and hold (q)*")
 	
 	if cv2.waitKey(25) & 0xFF == ord('q' or 'Q'):
-			endprogram()
-			
-		
-	#import csv file library 
-	import csv
-	
-	filename = 'datasetsametype.csv'
-	
-	while True:	
-				
-		print ('Appending to '+ str(filename)+ '...')
-		
-		if labelling==0:
-			print("It is set as healthy!")
-		else:
-			print("It is set as infected!")
-
-		
-		fieldnames = ['fortnum', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
-		 
-		try:
-			results = []
-			with open(filename) as File:
-				reader = csv.DictReader(File)
-				for rows in reader:
-					results.append(rows)
-			try:
-				#first character(fortnum) of previously appended line 
-				prefort = int(results[len(results)-1]['fortnum'])			
-			#if new file 			
-			except IndexError:
-				prefort = -1
-			
-			if prefort < 9:
-				fortnum = prefort + 1
-			elif prefort > 9:
-				fortnum = 0
-			file.close(File)
-			
-			L = {'fortnum': str(fortnum), 'imgid': str(filepath[Fid]), 'label': str(labelling), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
-
-			with open(filename,'a') as File:
-				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
-				
-				writer.writerow(L)
-
-				file.close(File)
-			
-		except IOError:
-			fortnum=0
-			L = {'fortnum': str(fortnum), 'imgid': str(filepath[Fid]), 'label': str(labelling), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
-
-			with open(filename,'w') as File:
-				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
-
-				writer.writeheader()
-		
-				writer.writerow(L)
-				
-				file.close(File)
-		
-		finally:
-			print ('\nFile '+ str(filename)+ ' updated!')
 			break
+
+	if labelling==0:
+                print("It is set as healthy!")
+	else:
+		print("It is set as infected!")
+
+        #L is a dictionary for storing values of row to be written into csv file
+	L = {'fortnum': str(fortnum), 'imgid': str(filepath[Fid]), 'label': str(labelling), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+
+	fortnum+=1
+
+	lst.append(L)
+	
+#import csv file library 
+      
+import csv
+	
+filename = 'datasetsametype.csv'
+        
+with open(filename,'w') as File:
+				
+	writer = csv.DictWriter(File, fieldnames = fieldnames)
+
+	writer.writeheader()
+
+	for i in lst :
+	
+                writer.writerow(i)			
+
+	File.close()        
+
 		
