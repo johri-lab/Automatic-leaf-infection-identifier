@@ -2,14 +2,17 @@ import cv2
 import numpy as np           
 import argparse, sys, os
 from GUIdriver import *
+import os.path
+from os import path
 
 def endprogram():
 	print ("\nProgram terminated!")
 	sys.exit()
 
 
-#Reading the image by parsing the argument 
+#Reading the image by parsing the argument
 text = str(ImageFile)
+imgid=text
 print ("\n*********************\nImage : " + ImageFile + "\n*********************")
 img = cv2.imread(text)
 
@@ -71,7 +74,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-ret,contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -141,7 +144,7 @@ cv2.imshow('masked out img',mask)
 
 
 #Finding contours for all infected regions
-_,contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 Infarea = 0
 for x in range(len(contours)):
@@ -173,7 +176,7 @@ print ('_________________________________________\n Percentage of infection regi
 	   + '\n_________________________________________')
 
 
-print("\n*To terminate press and hold (q)*")
+
 
 cv2.imshow('orig',original)
 
@@ -184,78 +187,82 @@ cv2.imshow('orig',original)
 print("\nDo you want to run the classifier(Y/N):")
 n = cv2.waitKey(0) & 0xFF
 
-if n == ord('q' or 'Q'):
-	endprogram()
-
 
 #import csv file library 
 import csv
 
-filename = 'datasetlog/Datasetunlabelledlog.csv' 
-while True:	
-	if  n == ord('y'or'Y'):
+filename = 'Datasetunlabelledlog.csv'
+fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
+
+import inspect
+
+
+if  (n == ord('y') or n== ord('Y')):
 		
-		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
+				
+	print ('Appending to ' + str(filename)+ '...')
 		
+	print ('\nFile ' + str(filename)+ ' updated!' )
 		
-		print ('Appending to ' + str(filename)+ '...')
-		
-		print ('\nFile ' + str(filename)+ ' updated!' )
-		
+	try:
+		results = []
+		with open(os.path.join('datasetlog',filename)) as File:
+			reader = csv.DictReader(File)
+			for rows in reader:
+				results.append(rows)
+				print(results)
 		try:
-			results = []
-			with open(filename) as File:
-				reader = csv.DictReader(File)
-				for rows in reader:
-					results.append(rows)
-			try:
-				#first character(fortnum) of previously appended line 
-				preflod = int(results[len(results)-1]['fortnum'])			
-			#if new file 			
-			except IndexError:
-				preflod = -1
+			#first character(fortnum) of previously appended line 
+			preflod = int(results[len(results)-1]['fortnum'])			
+		#if new file 			
+		except IndexError:
+			preflod = -1
 			
-			if preflod < 9:
-				fortnum = preflod + 1
-			elif preflod > 9:
-				fortnum = 0
-			file.close(File)
-			
-			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}	
-			
-			with open(filename,'a') as File:
-				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
-				
-				writer.writerow(L)
-
-				file.close(File)
-			
-		except IOError:
-			os.system('mkdir datasetlog')
+		if preflod < 9:
+			fortnum = preflod + 1
+		elif preflod > 9:
 			fortnum = 0
-			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
-
-			with open(filename,'w') as File:
+		File.close()
+			
+		L = {'fortnum': str(fortnum), 'imgid': os.path.basename(imgid), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}	
+			
+		with open(os.path.join('datasetlog',filename),'a+') as File:
 				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
+			writer = csv.DictWriter(File, fieldnames = fieldnames)
+				
+			writer.writerow(L)
 
-				writer.writeheader()
+			File.close()
+			
+	except IOError:
+                
+                if(path.exists('datasetlog')== False) :
+                        os.mkdir('datasetlog')
+
+                fortnum = 0
+                L = {'fortnum': str(fortnum), 'imgid': os.path.basename(imgid), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+                print("HI")
+                with open(os.path.join('datasetlog',filename),'w+') as File:
+
+                        writer = csv.DictWriter(File, fieldnames = fieldnames)
+
+                        writer.writeheader()
+
+                        writer.writerow(L)
+
+                        File.close()
+
+	finally:
+                import classifier
 		
-				writer.writerow(L)
-				
-				file.close(File)
 			
-		finally:
-						
-			import classifier
-			break
-
-			
-	elif n == ord('n' or 'N') :
-		print ('File not updated! \nSuccessfully terminated!')
-		break
+elif (n == ord('n') or n == ord('N')) :
+	print ('File not updated! \nSuccessfully terminated!')
 	
-	else:
-		print ('invalid input!')
-		break
+	
+else:
+	print ('invalid input!')
+	
+
+
+endprogram()
