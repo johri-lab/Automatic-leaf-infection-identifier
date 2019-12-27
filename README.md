@@ -138,4 +138,4 @@ The code runs on two files:
 ---
 [(Back to top)](#list-of-contents)
 
-The code in this project is licensed under the MIT license 2018 - Shikhar Johri.
+The code in this project is licensed under the [MIT-license 2018](https://github.com/johri002/Automatic-leaf-infection-identifier/blob/master/LICENSE) - Shikhar Johri.
