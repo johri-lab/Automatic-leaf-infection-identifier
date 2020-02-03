@@ -96,11 +96,11 @@ sudo python3 setup.py install
 
 In `leaf sampler` directory run:
 ```shell
-python leafdetectionALLsametype.py -i .
+python3 leafdetectionALLsametype.py -i .
 ```
 or
 ```shell
-python leafdetectionALLmix.py -i .
+python3 leafdetectionALLmix.py -i .
 ```
 `leafdetectionALLsametype.py` for running on one same category of images (say, all images are infected) and `leafdetectionALLmix.py` for creating dataset for both category (infected/healthy) of leaf images, in the working directory.
 *Note: The code is set to run for all `.jpg`,`.jpeg` and `.png` file format images only, present in the specified directory.

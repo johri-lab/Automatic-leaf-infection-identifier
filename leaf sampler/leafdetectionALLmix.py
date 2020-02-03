@@ -3,6 +3,9 @@ import numpy as np
 import argparse
 import os,sys
 import time
+import csv
+import pandas as pd
+
 
 def endprogram():
 	print ("\nProgram terminated!")
@@ -131,7 +134,7 @@ for Fid in range(len(filepath)):
 
 	#contour to find leafs
 	bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-	_, contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 	maxC = 0
 	for x in range(len(contours)):													
@@ -200,7 +203,7 @@ for Fid in range(len(filepath)):
 
 
 	#Finding contours for all infected regions
-	_, contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 	Infarea = 0
 	for x in range(len(contours)):
@@ -232,9 +235,9 @@ for Fid in range(len(filepath)):
 	print("*To terminate press (q)*")
 	print("\nDo you want to update the dataset file with the above results \n(press [Y/N] key on image)")
 	n = cv2.waitKey(0) & 0xFF
-	import csv
-	filename = 'datasetleafmixed.csv'
 	
+	filename = 'datasetleafmixed.csv'
+	imgid = str(filepath[Fid])
 	while True:	
 		if  n == ord('y'or'Y'):
 			print ('Appending to '+ str(filename)+ '...')
@@ -254,57 +257,31 @@ for Fid in range(len(filepath)):
 				print ("Invalid input!")
 				break
 			
-			fieldnames = ['fortnum', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
+			fieldnames = ['fold num', 'imgid', 'label', 'feature1', 'feature2', 'feature3']
 
 			#To append in previously created file
 			try:
-				results = []
-				with open(filename) as File:
-					reader = csv.DictReader(File)
-					for rows in reader:
-						results.append(rows)
-				try:
-					#first character(fortnum) of previously appended line 
-					prefort = int(results[len(results)-1]['fortnum'])			
-				#if new file  			
-				except IndexError:
-					prefort = -1
+				log = pd.read_csv(filename)
+				logfn = int(log.tail(1)['fold num'])
+				foldnum = (logfn+1)%10
+				L = [str(foldnum), imgid, str(labelling), str(Tarea), str(Infarea), str(perimeter)]
+				my_df = pd.DataFrame([L])
+				my_df.to_csv(filename, mode='a', index=False, header=False)			
+				print ('\nFile ' + str(filename)+ ' updated!' )
+					
 
-				if prefort < 9:
-					fortnum = prefort + 1
-				elif prefort > 9:
-					fortnum = 0
-				file.close(File)
-				
-				L = {'fortnum': str(fortnum), 'imgid': str(filepath[Fid]), 'label': str(labelling), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
-				
-				
-				with open(filename,'a') as File:
-
-					writer = csv.DictWriter(File, fieldnames = fieldnames)
-
-					writer.writerow(L)
-
-					file.close(File)
-
-			#To write a new file (IOError -> when dataset file not found in directory)
 			except IOError:
-				fortnum = 0
-				L = {'fortnum': str(fortnum), 'imgid': str(filepath[Fid]), 'label': str(labelling), 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+				foldnum = 0
+				L = [str(foldnum), imgid, str(labelling), str(Tarea), str(Infarea), str(perimeter)]
+
+				my_df = pd.DataFrame([fieldnames, L])
+				my_df.to_csv(filename, index=False, header=False)
+				print ('\nFile ' + str(filename)+ ' updated!' )
 				
-				with open(filename,'w') as File:
-
-					writer = csv.DictWriter(File, fieldnames = fieldnames)
-
-					writer.writeheader()
-
-					writer.writerow(L)
-
-					file.close(File)
-
 			finally:
-				print ('File '+ str(filename)+ ' updated!')
+				print ('\nFile '+ str(filename)+ ' updated!')
 				break
+
 
 			
 		elif n == ord('n' or 'N') :
