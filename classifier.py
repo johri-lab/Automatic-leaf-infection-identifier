@@ -13,7 +13,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 dataf = pd.read_csv("Datasetinfectedhealthy.csv")
 
 # extracting two features
-X = dataf.drop(['imgid','fortnum'], axis=1)
+X = dataf.drop(['imgid','fold num'], axis=1)
 y = X['label']
 X = X.drop('label', axis=1)
 
@@ -24,7 +24,7 @@ print(X)
 log = pd.read_csv("datasetlog/Datasetunlabelledlog.csv")
 
 log = log.tail(1)
-X_ul = log.drop(['imgid','fortnum'], axis=1)
+X_ul = log.drop(['imgid','fold num'], axis=1)
 
 print("\nTest dataset:-\n")
 print(X_ul)

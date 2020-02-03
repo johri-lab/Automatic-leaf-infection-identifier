@@ -2,6 +2,7 @@ import cv2
 import numpy as np           
 import argparse, sys, os
 from GUIdriver import *
+import pandas as pd
 
 def endprogram():
 	print ("\nProgram terminated!")
@@ -9,6 +10,7 @@ def endprogram():
 
 
 #Reading the image by parsing the argument 
+
 text = str(ImageFile)
 print ("\n*********************\nImage : " + ImageFile + "\n*********************")
 img = cv2.imread(text)
@@ -71,7 +73,7 @@ canny = cv2.cvtColor(canny,cv2.COLOR_GRAY2BGR)
 
 #contour to find leafs
 bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-ret,contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 maxC = 0
 for x in range(len(contours)):													#if take max or one less than max then will not work in
@@ -141,7 +143,7 @@ cv2.imshow('masked out img',mask)
 
 
 #Finding contours for all infected regions
-_,contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 Infarea = 0
 for x in range(len(contours)):
@@ -191,65 +193,42 @@ if n == ord('q' or 'Q'):
 #import csv file library 
 import csv
 
-filename = 'datasetlog/Datasetunlabelledlog.csv' 
+directory = 'datasetlog' 
+filename = directory+'/Datasetunlabelledlog.csv' 
+imgid = "/".join(text.split('/')[-2:])
+
 while True:	
 	if  n == ord('y'or'Y'):
 		
-		fieldnames = ['fortnum', 'imgid', 'feature1', 'feature2', 'feature3']
-		
+		fieldnames = ['fold num', 'imgid', 'feature1', 'feature2', 'feature3']
 		
 		print ('Appending to ' + str(filename)+ '...')
 		
-		print ('\nFile ' + str(filename)+ ' updated!' )
 		
 		try:
-			results = []
-			with open(filename) as File:
-				reader = csv.DictReader(File)
-				for rows in reader:
-					results.append(rows)
-			try:
-				#first character(fortnum) of previously appended line 
-				preflod = int(results[len(results)-1]['fortnum'])			
-			#if new file 			
-			except IndexError:
-				preflod = -1
-			
-			if preflod < 9:
-				fortnum = preflod + 1
-			elif preflod > 9:
-				fortnum = 0
-			file.close(File)
-			
-			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}	
-			
-			with open(filename,'a') as File:
+			log = pd.read_csv(filename)
+			logfn = int(log.tail(1)['fold num'])
+			foldnum = (logfn+1)%10
+			L = [str(foldnum), imgid, str(Tarea), str(Infarea), str(perimeter)]
+			my_df = pd.DataFrame([L])
+			my_df.to_csv(filename, mode='a', index=False, header=False)			
+			print ('\nFile ' + str(filename)+ ' updated!' )
 				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
-				
-				writer.writerow(L)
 
-				file.close(File)
-			
 		except IOError:
-			os.system('mkdir datasetlog')
-			fortnum = 0
-			L = {'fortnum': str(fortnum), 'imgid': args["input"], 'feature1': str(Tarea), 'feature2': str(Infarea), 'feature3': str(perimeter)}
+			if directory not in os.listdir():
+				os.system('mkdir ' + directory)
 
-			with open(filename,'w') as File:
-				
-				writer = csv.DictWriter(File, fieldnames = fieldnames)
+			foldnum = 0
+			L = [str(foldnum), imgid, str(Tarea), str(Infarea), str(perimeter)]
 
-				writer.writeheader()
-		
-				writer.writerow(L)
-				
-				file.close(File)
+			my_df = pd.DataFrame([fieldnames, L])
+			my_df.to_csv(filename, index=False, header=False)
+			print ('\nFile ' + str(filename)+ ' updated!' )
 			
 		finally:
-						
 			import classifier
-			break
+			endprogram()
 
 			
 	elif n == ord('n' or 'N') :
