@@ -74,7 +74,7 @@ These instructions assume you have `git` installed for working with Github from 
 
 1. Clone the repository, and navigate to the downloaded folder. Follow below commands.
 ```
-git clone https://github.com/johri002/Automatic-leaf-infection-identifier.git
+git clone https://github.com/johri-lab/Automatic-leaf-infection-identifier.git
 cd Automatic-leaf-infection-identifier
 ```
 
@@ -128,10 +128,10 @@ The code runs on two files:
 ----
 [(Back to top)](#list-of-contents)
 
-- Repository: https://github.com/johri002/Automatic-leaf-infection-identifier
-- Issue tracker: https://github.com/johri002/Automatic-leaf-infection-identifier/issues
+- Repository: https://github.com/johri-lab/Automatic-leaf-infection-identifier
+- Issue tracker: https://github.com/johri-lab/Automatic-leaf-infection-identifier/issues
   - In case of sensitive bugs or issues, please contact shikharjohri123@gmail.com directly instead of using issue tracker. We value your effort to improve the efficiency of this project!
-- Site: https://johri002.github.io/Automatic-leaf-infection-identifier/
+- Site: https://johri-lab.github.io/Automatic-leaf-infection-identifier/
 
 
 ## License
