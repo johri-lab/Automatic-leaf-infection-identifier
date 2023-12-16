@@ -134,7 +134,7 @@ for Fid in range(len(filepath)):
 
 	#contour to find leafs
 	bordered = cv2.cvtColor(canny,cv2.COLOR_BGR2GRAY)
-	contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,hierarchy = cv2.findContours(bordered, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[-2:]
 
 	maxC = 0
 	for x in range(len(contours)):													
@@ -203,7 +203,7 @@ for Fid in range(len(filepath)):
 
 
 	#Finding contours for all infected regions
-	contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+	contours,heirarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)[-2:]
 
 	Infarea = 0
 	for x in range(len(contours)):
